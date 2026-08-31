@@ -15,7 +15,9 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F7F9FA'/%3E%3Cpath d='M6 26V6' stroke='%2314202E' stroke-width='2'/%3E%3Cpath d='M6 26h20' stroke='%2314202E' stroke-width='2'/%3E%3Ccircle cx='12' cy='20' r='2.5' fill='%231F77B4'/%3E%3Ccircle cx='18' cy='14' r='2.5' fill='%231F77B4'/%3E%3Ccircle cx='24' cy='9' r='2.5' fill='%231F77B4'/%3E%3C/svg%3E">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0B1017">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1017'/%3E%3Cpath d='M6 26V6' stroke='%23E6EDF3' stroke-width='2'/%3E%3Cpath d='M6 26h20' stroke='%23E6EDF3' stroke-width='2'/%3E%3Ccircle cx='12' cy='20' r='2.5' fill='%2358A6FF'/%3E%3Ccircle cx='18' cy='14' r='2.5' fill='%2358A6FF'/%3E%3Ccircle cx='24' cy='9' r='2.5' fill='%2358A6FF'/%3E%3C/svg%3E">
 
   <link rel="preload" href="assets/fonts/IBMPlexSans-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/IBMPlexMono-500.woff2" as="font" type="font/woff2" crossorigin>
@@ -48,7 +50,6 @@
       <p class="positioning">Data Science undergrad at the University of Arizona who ships production
         analytics — Power&nbsp;BI suites, BI&nbsp;engines, and predictive models.</p>
       <ul class="hero-meta">
-        <li>Tucson, AZ</li>
         <li><a href="mailto:nahash@arizona.edu">nahash@arizona.edu</a></li>
         <!-- TODO: add LinkedIn profile URL, then replace the span below with a real link -->
         <li><span class="link-pending">LinkedIn — link coming soon</span></li>
@@ -94,7 +95,7 @@
   <!-- ============ ABOUT ============ -->
   <section id="about" class="section" aria-labelledby="about-h">
     <h2 id="about-h">About</h2>
-    <p>I'm a Data Science B.S. student at the University of Arizona (expected May 2027, GPA 3.76),
+    <p>I'm a Data Science B.S. student at the University of Arizona (expected May 2027),
       with minors in Artificial Intelligence and Computer Science — a Saudi national studying in
       the US. What I actually like doing is building systems that ship: dashboards leadership runs
       meetings on, BI engines that need zero infrastructure, models that hold up on held-out data.
@@ -132,10 +133,95 @@
   <!-- ============ PROJECTS ============ -->
   <section id="projects" class="section" aria-labelledby="projects-h">
     <h2 id="projects-h">Projects</h2>
+
+    <h3 class="project-group">In production — Saudi Aramco</h3>
+    <p class="project-group-note">The CCSD Control Center suite: three interconnected workforce
+      platforms I architected, built, and deployed as the Community Services Department's daily
+      operational system of record. All run on the Aramco intranet, so there are no public links.</p>
     <ul class="projects">
 
       <li class="project">
-        <h3><span class="fig">Fig.&nbsp;1</span> Moneyball in Soccer: Undervalued Player Valuation</h3>
+        <h4><span class="fig">Fig.&nbsp;1</span> CCSD Control Center: Zero-Infrastructure Suite Architecture</h4>
+        <p class="project-summary">Three production platforms as self-contained application files — no server, no database, no installation.</p>
+        <ul class="chips" aria-label="Built with">
+          <li>HTML/JS</li><li>SharePoint REST API</li><li>client-side XLSX</li><li>SVG charting</li>
+        </ul>
+        <ul class="project-results">
+          <li>Live multi-user read/write over the SharePoint REST API: document check-out/check-in,
+            record-level merge, deletion tombstones, and offline resilience — concurrent edits by
+            different users all survive.</li>
+          <li>Client-side Excel ingestion identifies corporate exports by column signature (not
+            filename) and resolves the same person across three source systems — with a deliberate
+            refusal to fuzzy-match when a definitive identifier disagrees.</li>
+          <li>Passed corporate review and deployed to production; in daily use managing real people,
+            deadlines, and compliance obligations.</li>
+        </ul>
+        <p class="project-links"><span class="link-internal">Internal — Aramco intranet</span></p>
+      </li>
+
+      <li class="project">
+        <h4><span class="fig">Fig.&nbsp;2</span> Workforce Intelligence</h4>
+        <p class="project-summary">The department's people, deadlines, and organizational coverage — live.</p>
+        <ul class="chips" aria-label="Built with">
+          <li>HTML/JS</li><li>data modeling</li><li>NLP</li>
+        </ul>
+        <ul class="project-results">
+          <li>Position-level coverage analysis joins the org chart to live absence data,
+            distinguishing incumbent, acting-cover, lapsed-cover, and vacant states — each stated
+            in words, never by color alone.</li>
+          <li>Leave conflicts computed as who-overlaps-with-whom pairings; every executive metric
+            drills straight through to its underlying records.</li>
+          <li>A natural-language query assistant answers counting, listing, and charting questions
+            entirely locally — no query or identifier leaves the corporate environment.</li>
+        </ul>
+        <p class="project-links"><span class="link-internal">Internal — Aramco intranet</span></p>
+      </li>
+
+      <li class="project">
+        <h4><span class="fig">Fig.&nbsp;3</span> Safety Matrix</h4>
+        <p class="project-summary">Certification compliance that monitors and escalates itself.</p>
+        <ul class="chips" aria-label="Built with">
+          <li>HTML/JS</li><li>statistical inference</li><li>email automation</li>
+        </ul>
+        <ul class="project-results">
+          <li>Course rules are inferred statistically from the register's own expiry behavior;
+            genuine ambiguity is flagged in writing rather than guessed, and human corrections
+            lock permanently.</li>
+          <li>Self-driving supervisor → division manager → director escalation ladder, idempotent
+            by construction — each certificate notifies exactly once per stage, and re-running the
+            engine sends nothing.</li>
+          <li>Provably non-destructive test console: previews the exact composition of every
+            pending message without ever being able to suppress a real reminder.</li>
+        </ul>
+        <p class="project-links"><span class="link-internal">Internal — Aramco intranet</span></p>
+      </li>
+
+      <li class="project">
+        <h4><span class="fig">Fig.&nbsp;4</span> PDP Development Tracker</h4>
+        <p class="project-summary">The Professional Development Programme managed end to end, including a fully automated orientation workflow.</p>
+        <ul class="chips" aria-label="Built with">
+          <li>HTML/JS</li><li>Excel automation</li><li>risk scoring</li>
+        </ul>
+        <ul class="project-results">
+          <li>Orientation automation generates the official pre-populated Excel checklist, emails
+            the next accountable sign-off owner with exactly what's outstanding, then re-reads
+            completed workbooks and reconciles progress — closing a multi-division paper process
+            with zero manual data entry.</li>
+          <li>Schedule-variance modeling and composite risk scoring surface developees falling
+            behind early, with an automatically generated intervention list.</li>
+          <li>Hardened read-only progress pages give each participant a live individual link that
+            is safe to distribute outside the administrative group.</li>
+        </ul>
+        <p class="project-links"><span class="link-internal">Internal — Aramco intranet</span></p>
+      </li>
+
+    </ul>
+
+    <h3 class="project-group">Independent work</h3>
+    <ul class="projects">
+
+      <li class="project">
+        <h4><span class="fig">Fig.&nbsp;5</span> Moneyball in Soccer: Undervalued Player Valuation</h4>
         <p class="project-summary">Market-value modeling that surfaces underpriced players through residual analysis.</p>
         <ul class="chips" aria-label="Built with">
           <li>Python</li><li>pandas</li><li>statsmodels</li><li>scikit-learn</li>
@@ -156,7 +242,7 @@
       </li>
 
       <li class="project">
-        <h3><span class="fig">Fig.&nbsp;2</span> LLM Benchmarks vs. Real-World Success</h3>
+        <h4><span class="fig">Fig.&nbsp;6</span> LLM Benchmarks vs. Real-World Success</h4>
         <p class="project-summary">Do leaderboard scores predict how people actually rate models? Partially.</p>
         <ul class="chips" aria-label="Built with">
           <li>Python</li><li>scikit-learn</li>
@@ -179,7 +265,7 @@
       </li>
 
       <li class="project">
-        <h3><span class="fig">Fig.&nbsp;3</span> VINRecordHub: Vehicle History Report Platform</h3>
+        <h4><span class="fig">Fig.&nbsp;7</span> VINRecordHub: Vehicle History Report Platform</h4>
         <p class="project-summary">Founder — full-stack vehicle-history report platform, live in production.</p>
         <ul class="chips" aria-label="Built with">
           <li>Supabase</li><li>PayPal</li><li>Resend</li><li>Vercel</li>
@@ -265,8 +351,9 @@
 </main>
 
 <footer class="site-footer">
-  <p>Mohammad Alnahash — built by hand in plain HTML and CSS. No framework, no build step.</p>
+  <p>Mohammad Alnahash — built by hand in plain HTML, CSS, and a few lines of JS. No framework, no build step.</p>
 </footer>
 
+<script src="script.js" defer></script>
 </body>
 </html>

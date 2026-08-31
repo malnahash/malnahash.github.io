@@ -1,0 +1,20 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading "Mohammad Alnahash" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Data Science undergrad at the University of Arizona who ships production analytics — Power BI suites, BI engines, and predictive models.
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 38%
+      - generic [ref=e8]: faster Power BI refresh
+    - generic [ref=e9]:
+      - generic [ref=e10]: 3,100
+      - generic [ref=e11]: person department served
+    - generic [ref=e12]:
+      - generic [ref=e13]: 150+
+      - generic [ref=e14]: leaders on my dashboard
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - text: R
+        - superscript [ref=e17]: "2"
+        - text: =0.985
+      - generic [ref=e18]: held-out model accuracy

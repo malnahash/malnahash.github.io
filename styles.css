@@ -1,9 +1,12 @@
 /* ============================================================
-   Mohammad Alnahash — portfolio
-   Design: "the page is a well-made chart."
-   Palette: cool plotting-paper ground, ink navy, matplotlib
-   tab:blue accent. Type: IBM Plex Sans (body) + IBM Plex Mono
-   (numerals, labels, chips). No framework, no build step.
+   Mohammad Alnahash — portfolio (dark)
+   Design: "the chart at night" — a control-room reading of the
+   plotting-paper concept. Deep blue-black ground, faint grid,
+   a perspective data-plane in the hero, panels with real depth.
+   Palette: ink navy ground, off-white ink, matplotlib tab:blue
+   lifted to pass AA on dark. Type: IBM Plex Sans + Plex Mono.
+   No framework, no build step. script.js adds optional card
+   tilt — the page is complete without it.
    ============================================================ */
 
 @font-face {
@@ -29,27 +32,42 @@
 }
 
 :root {
-  --paper: #F7F9FA;        /* page ground — cool, not cream */
-  --grid: #DCE3E8;         /* faint plotting gridlines */
-  --grid-strong: #C4CFD8;  /* card borders, axis lines */
-  --ink: #14202E;          /* primary text */
-  --muted: #46586A;        /* secondary text — 4.5:1+ on paper and grid */
-  --accent: #1F77B4;       /* matplotlib tab:blue — large marks only */
-  --accent-ink: #14618F;   /* darkened accent for text-size uses */
-  --card: #FFFFFF;
+  color-scheme: dark;
+
+  --ground: #0B1017;        /* page — near-black blue, never pure black */
+  --grid: #1A2430;          /* hero gridlines (decorative) */
+  --panel: #121A26;         /* raised surfaces */
+  --panel-deep: #0E1520;    /* panel gradient floor */
+  --edge: #26364A;          /* card borders — structural, survives forced-colors */
+  --edge-lit: #3A4E68;      /* specular top edge */
+
+  --ink: #E6EDF3;           /* body text ~15:1 on ground */
+  --muted: #9DAAB8;         /* secondary ~7:1 on ground, ~6:1 on panel */
+  --accent-text: #6CB3E8;   /* links & labels ~7:1 on ground */
+  --accent-bright: #8CC8F5; /* display numerals (large text) */
+  --accent-line: #58A6FF;   /* chart marks */
+  --focus: #8CC8F5;
 
   --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
 
-  --measure: 42rem;        /* ~72ch body column */
+  --measure: 42rem;
+
+  /* depth recipe used everywhere */
+  --shadow-rest:
+    0 1px 0 rgba(255,255,255,0.04) inset,
+    0 10px 24px rgba(0,0,0,0.35),
+    0 2px 6px rgba(0,0,0,0.4);
+  --shadow-lift:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 18px 40px rgba(0,0,0,0.45),
+    0 4px 10px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(108,179,232,0.18);
 }
 
 * { box-sizing: border-box; }
 
-html {
-  /* anchor jumps land clear of nothing (no sticky header), but give breathing room */
-  scroll-padding-top: 1.5rem;
-}
+html { scroll-padding-top: 1.5rem; }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
@@ -57,7 +75,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--ground);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 1.0625rem;
@@ -67,14 +85,14 @@ body {
 /* ---------- links & focus ---------- */
 
 a {
-  color: var(--accent-ink);
+  color: var(--accent-text);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 a:hover { text-decoration-thickness: 2px; }
 
 :focus-visible {
-  outline: 2px solid var(--accent-ink);
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -86,14 +104,12 @@ a:hover { text-decoration-thickness: 2px; }
   z-index: 10;
   padding: 0.5rem 1rem;
   background: var(--ink);
-  color: #FFFFFF;
+  color: #0B1017;
   font-family: var(--mono);
   font-size: 0.875rem;
   text-decoration: none;
 }
-.skip-link:focus {
-  top: 1rem;
-}
+.skip-link:focus { top: 1rem; }
 
 /* ---------- header ---------- */
 
@@ -105,7 +121,7 @@ a:hover { text-decoration-thickness: 2px; }
   max-width: 68rem;
   margin: 0 auto;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--grid-strong);
+  border-bottom: 1px solid var(--edge);
 }
 
 .site-name {
@@ -133,21 +149,44 @@ a:hover { text-decoration-thickness: 2px; }
 
 .resume-link { margin-left: auto; }
 
-/* ---------- hero ---------- */
+/* ---------- hero: the data plane ---------- */
 
 .hero {
-  /* the plotting grid lives here and only here */
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--edge);
+  /* faint flat grid behind everything */
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-size: 48px 48px;
-  border-bottom: 1px solid var(--grid-strong);
+}
+
+/* the signature: a perspective grid floor receding behind the stats.
+   Static (no animation) so it needs no motion gating. */
+.hero::before {
+  content: "";
+  position: absolute;
+  left: -30%;
+  right: -30%;
+  bottom: -12rem;
+  height: 34rem;
+  background-image:
+    linear-gradient(rgba(88,166,255,0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88,166,255,0.16) 1px, transparent 1px);
+  background-size: 56px 56px;
+  transform: perspective(28rem) rotateX(62deg);
+  transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent 78%);
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent 78%);
+  pointer-events: none;
 }
 
 .hero-inner {
+  position: relative;
   max-width: 68rem;
   margin: 0 auto;
-  padding: 4.5rem 1.5rem 4rem;
+  padding: 4.5rem 1.5rem 4.5rem;
 }
 
 h1 {
@@ -177,13 +216,12 @@ h1 {
   color: var(--muted);
 }
 
-/* ---------- the stats: numbers as the display element ---------- */
+/* ---------- stats: floating instrument panels ---------- */
 
 .stats {
-  /* 2x2 small-multiples panel — never an orphaned row */
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem 4rem;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -193,20 +231,13 @@ h1 {
 }
 
 .stat {
-  /* each stat sits on its own axis baseline, like a plotted series */
-  border-top: 2px solid var(--ink);
-  padding-top: 1rem;
   position: relative;
-}
-.stat::before {
-  /* axis tick */
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 0.6rem;
-  background: var(--ink);
+  padding: 1.5rem 1.75rem 1.6rem;
+  background: linear-gradient(180deg, var(--panel), var(--panel-deep));
+  border: 1px solid var(--edge);
+  border-top-color: var(--edge-lit);
+  border-radius: 10px;
+  box-shadow: var(--shadow-rest);
 }
 
 .stat p { margin: 0; }
@@ -216,9 +247,10 @@ h1 {
   font-family: var(--mono);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-size: clamp(2.5rem, 5.5vw, 4rem);
   line-height: 1.05;
-  color: var(--accent-ink);
+  color: var(--accent-bright);
+  text-shadow: 0 0 24px rgba(88,166,255,0.25); /* decorative; contrast holds without it */
 }
 .stat-number sup {
   font-size: 0.5em;
@@ -230,7 +262,7 @@ h1 {
 
 .stat-caption {
   display: block;
-  max-width: 26ch;
+  max-width: 32ch;
   margin-top: 0.5rem;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -238,12 +270,11 @@ h1 {
 }
 
 .spark { width: 7.5rem; height: 2.5rem; margin-top: 0.75rem; }
-.spark-axis { stroke: var(--grid-strong); stroke-width: 1; }
-.spark-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.spark-axis { stroke: var(--edge-lit); stroke-width: 1; }
+.spark-line { fill: none; stroke: var(--accent-line); stroke-width: 2; }
 .spark-dot { fill: var(--ink); }
-.spark-dot-end { fill: var(--accent); }
+.spark-dot-end { fill: var(--accent-line); }
 
-/* one orchestrated entrance, motion-gated; resting state is fully visible */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes stat-in {
     from { opacity: 0; transform: translateY(0.75rem); }
@@ -253,6 +284,9 @@ h1 {
   .stat:nth-child(2) { animation-delay: 0.08s; }
   .stat:nth-child(3) { animation-delay: 0.16s; }
   .stat:nth-child(4) { animation-delay: 0.24s; }
+
+  .stat { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
 }
 
 /* ---------- sections ---------- */
@@ -267,16 +301,13 @@ h1 {
 h2 {
   margin: 0 0 1.25rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--grid-strong);
+  border-bottom: 1px solid var(--edge);
   font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
-.section > p {
-  max-width: var(--measure);
-  margin-top: 0;
-}
+.section > p { max-width: var(--measure); margin-top: 0; }
 
 /* ---------- experience ---------- */
 
@@ -303,25 +334,63 @@ h3 {
 
 /* ---------- projects ---------- */
 
+.project-group {
+  margin: 2rem 0 0.5rem;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--accent-text);
+}
+h2#projects-h + .project-group { margin-top: 0; }
+
+.project-group-note {
+  max-width: var(--measure);
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
 .projects {
   display: grid;
   gap: 1.5rem;
-  margin: 0;
+  margin: 0 0 1rem;
   padding: 0;
   list-style: none;
 }
 
 .project {
-  background: var(--card);
-  border: 1px solid var(--grid-strong);
+  background: linear-gradient(180deg, var(--panel), var(--panel-deep));
+  border: 1px solid var(--edge);
+  border-top-color: var(--edge-lit);
+  border-radius: 10px;
   padding: 1.75rem;
+  box-shadow: var(--shadow-rest);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .project {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform;
+  }
+  /* script.js layers a pointer tilt on top; both stay within a few px
+     so links never move out from under the cursor */
+  .project:hover, .project:focus-within {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+.project h4 {
+  margin: 0 0 0.25rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
 }
 
 .fig {
   font-family: var(--mono);
   font-weight: 500;
   font-size: 0.8125rem;
-  color: var(--accent-ink);
+  color: var(--accent-text);
   margin-right: 0.5rem;
 }
 
@@ -347,18 +416,27 @@ h3 {
   font-size: 0.875rem;
 }
 
-.link-pending {
+.link-pending,
+.link-internal {
   font-family: var(--mono);
   font-size: 0.875rem;
-  font-style: italic;
   color: var(--muted);
 }
+.link-pending { font-style: italic; }
 
 .project-quiet {
   background: none;
   border: none;
-  border-top: 1px dashed var(--grid-strong);
+  border-radius: 0;
+  box-shadow: none;
+  border-top: 1px dashed var(--edge);
   padding: 1.25rem 0 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .project-quiet:hover, .project-quiet:focus-within {
+    transform: none;
+    box-shadow: none;
+  }
 }
 .project-quiet p { max-width: var(--measure); margin: 0; }
 
@@ -386,9 +464,12 @@ h3 {
   font-size: 0.8125rem;
   line-height: 1.4;
   padding: 0.2em 0.65em;
-  background: var(--card);
-  border: 1px solid var(--grid-strong);
-  border-radius: 3px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #17202E, #101823);
+  border: 1px solid var(--edge);
+  border-top-color: var(--edge-lit);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 #skills > h3 {
@@ -408,7 +489,7 @@ h3 {
 /* ---------- footer ---------- */
 
 .site-footer {
-  border-top: 1px solid var(--grid-strong);
+  border-top: 1px solid var(--edge);
   margin-top: 4rem;
 }
 .site-footer p {
@@ -423,8 +504,7 @@ h3 {
 /* ---------- small screens ---------- */
 
 @media (max-width: 480px) {
-  .hero-inner { padding: 3rem 1.25rem 3rem; }
+  .hero-inner { padding: 3rem 1.25rem; }
   .section { padding-left: 1.25rem; padding-right: 1.25rem; }
   .project { padding: 1.25rem; }
-  .stats { gap: 2rem; }
 }
