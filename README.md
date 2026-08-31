@@ -2,7 +2,7 @@
 
 Personal portfolio, served by GitHub Pages at `https://malnahash.github.io`.
 
-Plain static HTML/CSS. **No framework, no build step, no JS.** Edit the files, push to `main`, and GitHub Pages redeploys automatically in about a minute.
+Plain static HTML/CSS plus one tiny script. **No framework, no build step.** Edit the files, push to `main`, and GitHub Pages redeploys automatically in about a minute. Dark control-room theme; design tokens live at the top of `styles.css`.
 
 ## Files
 
@@ -10,6 +10,7 @@ Plain static HTML/CSS. **No framework, no build step, no JS.** Edit the files, p
 |---|---|
 | `index.html` | The whole site — all content lives here |
 | `styles.css` | All styling; design tokens are CSS variables at the top |
+| `script.js` | Pointer tilt on cards — progressive enhancement, motion-gated |
 | `assets/Mohammad_Alnahash_Resume.pdf` | Résumé linked from header + contact |
 | `assets/og.png` | Link-preview image (LinkedIn/social) |
 | `assets/fonts/` | Self-hosted IBM Plex Sans + Mono (woff2) — no third-party font requests |
