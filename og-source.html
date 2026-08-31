@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1200px; height: 630px;
+    background: #F7F9FA;
+    background-image:
+      linear-gradient(#DCE3E8 1px, transparent 1px),
+      linear-gradient(90deg, #DCE3E8 1px, transparent 1px);
+    background-size: 48px 48px;
+    color: #14202E;
+    font-family: "IBM Plex Sans", sans-serif;
+    padding: 70px 80px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  h1 { font-size: 64px; font-weight: 700; letter-spacing: -0.015em; }
+  .pos { font-size: 27px; max-width: 900px; line-height: 1.45; margin-top: 14px; }
+  .stats { display: flex; gap: 64px; }
+  .stat { border-top: 3px solid #14202E; padding-top: 16px; position: relative; }
+  .stat::before { content:""; position:absolute; top:0; left:0; width:3px; height:12px; background:#14202E; }
+  .n { font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: 58px; color: #14618F; }
+  .n sup { font-size: 0.5em; }
+  .c { font-family: "IBM Plex Mono", monospace; font-size: 17px; color: #46586A; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div>
+    <h1>Mohammad Alnahash</h1>
+    <p class="pos">Data Science undergrad at the University of Arizona who ships production analytics — Power&nbsp;BI suites, BI&nbsp;engines, and predictive models.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">38%</div><div class="c">faster Power BI refresh</div></div>
+    <div class="stat"><div class="n">3,100</div><div class="c">person department served</div></div>
+    <div class="stat"><div class="n">150+</div><div class="c">leaders on my dashboard</div></div>
+    <div class="stat"><div class="n">R<sup>2</sup>=0.985</div><div class="c">held-out model accuracy</div></div>
+  </div>
+</body>
+</html>
