@@ -38,4 +38,4 @@ The "coming soon" placeholders are plain text, not dead links — replace each `
 
 ## License
 
-Code is [MIT](LICENSE). Personal content — text, images, the résumé — is not; all rights reserved.
+Code is [MIT](LICENSE). Personal content — text, images, the résumé, and the IBM Plex fonts (SIL OFL, licensed separately) — is not; all rights reserved.
